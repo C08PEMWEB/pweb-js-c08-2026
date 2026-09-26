@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keranjang Belanja - Mini Shopee</title>
+
+  <!-- CSS Murni (Native Front-End) -->
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/cart.css" />
+
+  <!-- JavaScript Eksternal dengan defer (Wajib sesuai ketentuan) -->
+  <script src="js/auth.js" defer></script>
+  <script src="js/cart.js" defer></script>
+</head>
+<body>
+
+  <!-- ========================================================================
+       NAVBAR GLOBAL (Anggota 1: Sesi & Logout | Anggota 3: Keranjang & Badge)
+       ======================================================================== -->
+  <header class="navbar">
+    <div class="container">
+      <div class="nav-brand">
+        <a href="index.html">🛍️ Mini Shopee <span>Modul 2</span></a>
+      </div>
+
+      <div class="nav-menu">
+        <span class="user-greeting">
+          Halo, <strong id="navbarUserName">Pengguna</strong>!
+        </span>
+
+        <a href="cart.html" class="cart-nav-link" id="navCartLink" title="Keranjang Belanja">
+          🛒 Keranjang
+          <span class="cart-badge" id="navbarCartBadge">0</span>
+        </a>
+
+        <button type="button" class="btn-nav" id="btnLogout">
+          🚪 Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       KONTEN KERANJANG BELANJA (Anggota 3)
+       ======================================================================== -->
+  <main class="container cart-page-content" id="cartPageContainer">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <h1 class="cart-heading">🛒 Keranjang Belanja Saya</h1>
+      <a href="index.html" class="btn btn-secondary">
+        &larr; Lanjut Belanja
+      </a>
+    </div>
+
+    <!-- Tampilan Jika Keranjang Kosong -->
+    <div id="cartEmptyState" class="cart-empty-state hidden">
+      <div class="cart-empty-icon">🛒</div>
+      <h3>Keranjang belanja Anda masih kosong!</h3>
+      <p>Yuk cari produk menarik di katalog Mini Shopee.</p>
+      <a href="index.html" class="btn btn-primary" style="margin-top: 10px;">
+        Mulai Belanja Sekarang
+      </a>
+    </div>
+
+    <!-- Layout Grid: Daftar Barang & Ringkasan Belanja -->
+    <div class="cart-layout">
+      <!-- Daftar Produk di Keranjang (Render Dinamis dari localStorage) -->
+      <section class="cart-items-card" id="cartItemsList">
+        <!-- Tabel item dirender oleh cart.js -->
+      </section>
+
+      <!-- Ringkasan Belanja & Total Harga Dinamis -->
+      <aside class="cart-summary-card" id="cartSummarySection">
+        <h2 class="summary-title">Ringkasan Belanja</h2>
+        
+        <div class="summary-row">
+          <span>Total Item</span>
+          <strong id="summaryTotalItems">0</strong>
+        </div>
+
+        <div class="summary-row">
+          <span>Estimasi Pengiriman</span>
+          <span style="color: var(--success-color); font-weight: 600;">GRATIS</span>
+        </div>
+
+        <div class="summary-row total-row">
+          <span>Total Tagihan</span>
+          <span class="total-price-value" id="summaryTotalPrice">$0.00</span>
+        </div>
+
+        <button type="button" id="btnCheckout" class="btn btn-primary btn-checkout">
+          Beli Sekarang (Checkout)
+        </button>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Mini Shopee - Praktikum Pemrograman Web C08 (Native Front-End)</p>
+    </div>
+  </footer>
+
+</body>
+</html>
