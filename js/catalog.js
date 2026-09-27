@@ -15,6 +15,15 @@
 
 // 1. URL API & Variabel State Sederhana
 const PRODUCTS_API_URL = 'https://dummyjson.com/products?limit=100';
+const KURS_USD_KE_IDR = 16000; // Kurs konversi USD ke Rupiah (Rp 16.000 / USD)
+
+/**
+ * Format harga dari USD ke format Rupiah Indonesia (contoh: 160.000)
+ */
+function formatRupiah(priceInUSD) {
+  const rupiah = Math.round(priceInUSD * KURS_USD_KE_IDR);
+  return rupiah.toLocaleString('id-ID');
+}
 
 let allProducts = [];        // Data asli seluruh produk dari API
 let filteredProducts = [];   // Data produk setelah disaring (search/filter/sort)
@@ -202,8 +211,8 @@ function renderProducts() {
           ${escapeHtml(product.title)}
         </h3>
         <div class="card-price-row">
-          <span class="currency-symbol">$</span>
-          <span class="price-number">${product.price.toFixed(2)}</span>
+          <span class="currency-symbol">Rp</span>
+          <span class="price-number">${formatRupiah(product.price)}</span>
         </div>
         <div class="card-meta">
           <span class="card-rating">⭐ ${product.rating.toFixed(1)}</span>
@@ -330,5 +339,6 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchProducts();
 });
 
-// Menyediakan akses produk untuk komponen modal detail (Anggota 3)
+// Menyediakan akses produk dan fungsi format Rupiah untuk modul lain (Anggota 3)
 window.getAllProducts = () => allProducts;
+window.formatRupiah = formatRupiah;
