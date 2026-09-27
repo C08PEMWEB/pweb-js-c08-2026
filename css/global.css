@@ -69,27 +69,12 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
-.navbar-top {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 12px;
-  padding: 6px 0;
-  font-size: 0.78rem;
-  color: #ffffff;
-  opacity: 0.9;
-}
-
-.navbar-top span {
-  color: #ffffff;
-}
-
 .navbar-main {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 10px 0 14px 0;
+  padding: 14px 0 16px 0;
 }
 
 /* 1. Logo Shopee (Vector SVG Bag + Text) */
