@@ -106,7 +106,22 @@
 .modal-brand-text {
   font-size: 0.85rem;
   color: var(--shopee-muted);
+  margin-bottom: 8px;
+}
+
+.modal-rating-text {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.85rem;
+  color: var(--shopee-rating);
+  font-weight: 600;
   margin-bottom: 14px;
+}
+
+.modal-rating-text .icon-star-svg {
+  width: 14px;
+  height: 14px;
 }
 
 .modal-price-box {

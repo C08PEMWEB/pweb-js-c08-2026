@@ -15,10 +15,6 @@
 </head>
 <body>
 
-  <!-- ========================================================================
-       NAVBAR UTAMA SHOPEE (disalin persis dari index.html — lihat catatan
-       di chat soal HTML native tidak bisa "include" otomatis)
-       ======================================================================== -->
   <header class="shopee-navbar">
     <div class="container">
       <div class="navbar-main">
@@ -83,9 +79,7 @@
     </div>
   </header>
 
-  <!-- ========================================================================
-       KONTEN HALAMAN KERANJANG (Tanggung Jawab: Anggota 3)
-       ======================================================================== -->
+
   <main class="container cart-page-main">
 
     <h1 class="cart-page-title">Keranjang Belanja</h1>
@@ -133,10 +127,6 @@
     </div>
   </main>
 
-  <!-- ========================================================================
-       MODAL DETAIL PRODUK (disalin dari index.html supaya bisa dipakai ulang
-       di halaman cart — dipakai oleh modal.js yang sama)
-       ======================================================================== -->
   <div id="productDetailModal" class="modal-overlay" role="dialog" aria-modal="true">
     <div class="modal-card">
       <button type="button" class="modal-close-icon" id="modalCloseBtn" aria-label="Tutup">
@@ -152,6 +142,12 @@
           <span id="modalCategory" class="modal-badge-cat">Kategori</span>
           <h2 id="modalTitle" class="modal-name">Nama Produk</h2>
           <span id="modalBrand" class="modal-brand-text">Brand</span>
+          <div id="modalRating" class="modal-rating-text">
+            <svg class="icon-star-svg" viewBox="0 0 24 24" fill="#ffb800">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            <span id="modalRatingValue">-</span>
+          </div>
 
           <div class="modal-price-box">
             <span class="currency-symbol">Rp</span>

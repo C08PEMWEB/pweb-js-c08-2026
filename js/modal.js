@@ -10,9 +10,7 @@ function getProductDataById(productId) {
     if (found) return found;
   }
 
-  // 2. Fallback: ambil data dari localStorage (untuk cart.html, saat
-  //    catalog.js belum ke-load). Sekarang datanya lengkap karena
-  //    addToCart() di cart.js sudah menyimpan category/brand/stock/desc.
+  // 2. Fallback: ambil data dari localStorage
   if (typeof window.getCart === 'function') {
     const cartItem = window.getCart().find((i) => i.id === productId);
     if (cartItem) {
@@ -25,6 +23,7 @@ function getProductDataById(productId) {
         brand: cartItem.brand || '-',
         stock: cartItem.stock !== undefined ? cartItem.stock : null,
         description: cartItem.description || '-',
+        rating: cartItem.rating,
       };
     }
   }
@@ -55,6 +54,11 @@ function openProductModal(productId) {
   if (modalCategory) modalCategory.textContent = product.category || '-';
   if (modalTitle) modalTitle.textContent = product.title || '-';
   if (modalBrand) modalBrand.textContent = product.brand || '-';
+
+  const modalRatingValue = document.getElementById('modalRatingValue');
+  if (modalRatingValue) {
+    modalRatingValue.textContent = product.rating ? product.rating.toFixed(1) : '-';
+  }
 
   const priceInUSD = product.price || 0;
   if (modalPrice) {
@@ -111,7 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-
+/* ====================
+   EVENT DELEGATION 
+   ===================*/
 function handleOpenDetailClick(event) {
   const target = event.target.closest('[data-action="open-detail"]');
   if (!target) return;
