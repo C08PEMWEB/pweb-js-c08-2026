@@ -1,4 +1,23 @@
-// ===== LOGIKA AUTH & LOGIN (ANGGOTA 1) =====
+// ===== 1. AUTH GUARD (Proteksi Halaman Global - Anggota 1) =====
+function checkAuthGuard() {
+  const path = window.location.pathname;
+  // Deteksi apakah saat ini sedang berada di halaman login
+  const isLoginPage = path.endsWith('login.html') || path.endsWith('/login') || path.endsWith('/login/');
+  const userSession = localStorage.getItem('firstName');
+
+  if (!userSession && !isLoginPage) {
+    // Pengguna belum login tapi mencoba akses index.html, cart.html, atau root (/)
+    window.location.href = 'login.html';
+  } else if (userSession && isLoginPage) {
+    // Pengguna sudah login tapi membuka login.html -> auto redirect ke katalog produk
+    window.location.href = 'index.html';
+  }
+}
+
+// Jalankan Auth Guard langsung saat script dimuat (defer)
+checkAuthGuard();
+
+// ===== 2. LOGIKA AUTH & LOGIN (ANGGOTA 1) =====
 (() => {
   // Ambil semua elemen HTML yang dibutuhkan
   const form = document.getElementById("form-login");
@@ -89,7 +108,7 @@
   });
 })();
 
-// ===== Sapaan Pengguna di Navbar & Tombol Logout =====
+// ===== 3. Sapaan Pengguna di Navbar & Tombol Logout =====
 document.addEventListener("DOMContentLoaded", () => {
   const navbarUserName = document.getElementById("navbarUserName");
   const btnLogout = document.getElementById("btnLogout");
