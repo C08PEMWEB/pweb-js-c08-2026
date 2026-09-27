@@ -1,0 +1,350 @@
+/* ==========================================================================
+   CATALOG CSS - SHOPEE LITE STYLE (Halaman Katalog & Produk)
+   Tanggung Jawab: Anggota 2
+   Karakteristik: Flat design, Solid Orange (#ee4d2d), Tanpa Gradien, Tidak Slop
+   ========================================================================== */
+
+/* ==========================================================================
+   1. FILTER & SEARCH CONTROL BAR (ALA SHOPEE LITE)
+   ========================================================================== */
+.catalog-top-section {
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--shopee-border);
+  padding: 16px 0;
+  margin-bottom: 20px;
+}
+
+.catalog-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Shopee Search Box */
+.shopee-search-bar {
+  display: flex;
+  width: 100%;
+  background-color: #ffffff;
+  border: 2px solid var(--shopee-orange);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.shopee-search-input {
+  flex: 1;
+  border: none;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  color: var(--shopee-text);
+  background-color: #ffffff;
+}
+
+.shopee-search-input::placeholder {
+  color: #999999;
+  font-size: 0.88rem;
+}
+
+.shopee-search-btn {
+  background-color: var(--shopee-orange);
+  color: #ffffff;
+  border: none;
+  padding: 0 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.shopee-search-btn:hover {
+  background-color: var(--shopee-orange-hover);
+}
+
+/* Filter Kategori & Sorting Row */
+.filter-sort-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--shopee-muted);
+}
+
+.filter-label {
+  font-weight: 500;
+  color: var(--shopee-text);
+}
+
+.shopee-select {
+  background-color: #ffffff;
+  border: 1px solid var(--shopee-border);
+  border-radius: var(--radius-sm);
+  padding: 7px 12px;
+  font-size: 0.88rem;
+  color: var(--shopee-text);
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.shopee-select:focus {
+  border-color: var(--shopee-orange);
+}
+
+/* ==========================================================================
+   2. VISUAL FEEDBACK: LOADING & ERROR STATE
+   ========================================================================== */
+.catalog-status-box {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #ffffff;
+  border: 1px solid var(--shopee-border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 24px;
+}
+
+.catalog-status-box p {
+  margin-top: 12px;
+  color: var(--shopee-muted);
+  font-size: 0.95rem;
+}
+
+.catalog-error-box {
+  background-color: #ffffff;
+  border: 1px solid #ff424f;
+  border-left: 4px solid #ff424f;
+  padding: 24px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.catalog-error-box h3 {
+  color: #ff424f;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.catalog-error-box p {
+  color: var(--shopee-muted);
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.empty-results-box {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #ffffff;
+  border: 1px solid var(--shopee-border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 24px;
+}
+
+.empty-results-icon {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+}
+
+.empty-results-box h4 {
+  font-size: 1.05rem;
+  color: var(--shopee-text);
+  margin-bottom: 6px;
+}
+
+.empty-results-box p {
+  font-size: 0.88rem;
+  color: var(--shopee-muted);
+}
+
+/* ==========================================================================
+   3. PRODUCT CARD GRID (CSS GRID ALA SHOPEE LITE)
+   ========================================================================== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(188px, 1fr));
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+/* Kartu Produk ShopeeLite: Solid White, Border Halus, No Gradient */
+.product-card {
+  background-color: var(--shopee-card);
+  border: 1px solid var(--shopee-border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--shopee-orange);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Thumbnail Produk */
+.card-thumb-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* Rasio 1:1 persegi khas Shopee */
+  background-color: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.card-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10px;
+}
+
+/* Badge Diskon Shopee (Solid Oranye Terang) */
+.shopee-discount-tag {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background-color: var(--shopee-orange-light);
+  color: var(--shopee-orange);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 2px;
+  border: 1px solid rgba(238, 77, 45, 0.3);
+}
+
+/* Informasi Konten Kartu */
+.card-content {
+  padding: 10px 10px 12px 10px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-category {
+  font-size: 0.72rem;
+  color: var(--shopee-muted);
+  text-transform: capitalize;
+  margin-bottom: 4px;
+}
+
+.card-title {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--shopee-text);
+  line-height: 1.35;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 2.4em;
+}
+
+/* Baris Harga Shopee */
+.card-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.currency-symbol {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--shopee-price);
+}
+
+.price-number {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--shopee-price);
+}
+
+/* Rating & Brand */
+.card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  color: var(--shopee-muted);
+  margin-bottom: 12px;
+}
+
+.card-rating {
+  color: var(--shopee-rating);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.card-brand {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 90px;
+}
+
+/* Tombol Aksi Keranjang */
+.card-footer {
+  margin-top: auto;
+}
+
+.btn-add-cart {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   4. TOMBOL LOAD MORE / PAGINATION (ARRAY SLICING)
+   ========================================================================== */
+.load-more-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0 40px 0;
+}
+
+.btn-load-more {
+  background-color: #ffffff;
+  color: var(--shopee-orange);
+  border: 1px solid var(--shopee-orange);
+  padding: 10px 36px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-load-more:hover {
+  background-color: var(--shopee-orange);
+  color: #ffffff;
+}
+
+/* Info jumlah item yang tampil */
+.load-more-info {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--shopee-muted);
+  margin-top: 8px;
+}

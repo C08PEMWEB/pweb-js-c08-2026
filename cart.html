@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopeeLite - Keranjang Belanja</title>
+
+  <!-- CSS Murni (Flat, No Gradient) -->
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/cart.css" />
+
+  <!-- JavaScript Eksternal dengan defer -->
+  <script src="js/auth.js" defer></script>
+  <script src="js/cart.js" defer></script>
+</head>
+<body>
+
+  <!-- Navbar ShopeeLite -->
+  <header class="shopee-navbar">
+    <div class="container">
+      <div class="navbar-top">
+        <span>Praktikum Modul 2 (Native Front-End)</span>
+        <span>•</span>
+        <span>Kelompok C08</span>
+      </div>
+
+      <div class="navbar-main">
+        <a href="index.html" class="shopee-logo">
+          🛍️ Shopee<span class="shopee-logo-tag">Lite</span>
+        </a>
+
+        <div class="nav-actions">
+          <div class="user-badge">
+            👤 Halo, <strong id="navbarUserName">Pengguna</strong>!
+          </div>
+
+          <a href="cart.html" class="nav-cart-btn" id="navCartLink">
+            🛒 Keranjang
+            <span class="cart-count" id="navbarCartBadge">0</span>
+          </a>
+
+          <button type="button" class="btn-logout" id="btnLogout">
+            Keluar
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Konten Keranjang Belanja -->
+  <main class="container cart-main-area" id="cartPageContainer">
+    <div class="cart-title-row">
+      <h1>🛒 Keranjang Belanja Anda</h1>
+      <a href="index.html" class="btn btn-white">&larr; Kembali ke Katalog</a>
+    </div>
+
+    <!-- Tampilan Jika Keranjang Kosong -->
+    <div id="cartEmpty" class="cart-empty-box hidden">
+      <div style="font-size: 3rem; margin-bottom: 10px;">🛒</div>
+      <h3 style="margin-bottom: 6px;">Keranjang belanja Anda kosong</h3>
+      <p style="color: var(--shopee-muted); margin-bottom: 16px;">Yuk temukan produk-produk menarik di katalog ShopeeLite!</p>
+      <a href="index.html" class="btn btn-shopee-orange">Mulai Belanja Sekarang</a>
+    </div>
+
+    <!-- Layout Grid: List Belanja & Summary -->
+    <div class="cart-grid-layout" id="cartLayout">
+      <div class="cart-table-card" id="cartPageList">
+        <!-- Tabel dirender dinamis oleh cart.js -->
+      </div>
+
+      <aside class="cart-summary-box" id="cartSummary">
+        <h2 class="summary-heading">Ringkasan Pesanan</h2>
+        
+        <div class="summary-line">
+          <span>Total Jumlah Barang</span>
+          <strong id="totalItemsCount">0</strong>
+        </div>
+
+        <div class="summary-line">
+          <span>Ongkos Kirim</span>
+          <span style="color: var(--shopee-green); font-weight: 600;">GRATIS ONGKIR</span>
+        </div>
+
+        <div class="summary-line grand-total">
+          <span>Total Pembayaran</span>
+          <span class="grand-total-price" id="totalPriceAmount">$0.00</span>
+        </div>
+
+        <button type="button" id="btnCheckout" class="btn btn-shopee-orange" style="width: 100%; margin-top: 18px; padding: 10px;">
+          Checkout Sekarang
+        </button>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="shopee-footer">
+    <div class="container">
+      <p>&copy; 2026 ShopeeLite - Tugas Praktikum Pemrograman Web Modul 2 (Native Front-End)</p>
+    </div>
+  </footer>
+
+</body>
+</html>

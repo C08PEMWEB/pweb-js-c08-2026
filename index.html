@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopeeLite - Katalog Produk Praktikum</title>
+
+  <!-- CSS Murni (Native, Flat ShopeeLite Theme, No Gradient) -->
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/catalog.css" />
+  <link rel="stylesheet" href="css/modal.css" />
+
+  <!-- JavaScript Eksternal Wajib Memakai Atribut defer -->
+  <script src="js/auth.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/modal.js" defer></script>
+  <script src="js/catalog.js" defer></script>
+</head>
+<body>
+
+  <!-- ========================================================================
+       NAVBAR UTAMA SHOPEE LITE (Solid Oranye #ee4d2d, Tanpa Gradien)
+       ======================================================================== -->
+  <header class="shopee-navbar">
+    <div class="container">
+      <!-- Sub-baris atas: Informasi & Link Praktikum -->
+      <div class="navbar-top">
+        <span>Praktikum Modul 2 (Native Front-End)</span>
+        <span>•</span>
+        <span>Kelompok C08</span>
+      </div>
+
+      <!-- Baris utama navbar -->
+      <div class="navbar-main">
+        <!-- Logo ShopeeLite -->
+        <a href="index.html" class="shopee-logo">
+          🛍️ Shopee<span class="shopee-logo-tag">Lite</span>
+        </a>
+
+        <!-- Aksi Kanan: Sapaan User (Anggota 1), Keranjang (Anggota 3), Logout (Anggota 1) -->
+        <div class="nav-actions">
+          <div class="user-badge">
+            👤 Halo, <strong id="navbarUserName">Pengguna</strong>!
+          </div>
+
+          <a href="cart.html" class="nav-cart-btn" id="navCartLink" title="Lihat Keranjang Belanja">
+            🛒 Keranjang
+            <span class="cart-count" id="navbarCartBadge">0</span>
+          </a>
+
+          <button type="button" class="btn-logout" id="btnLogout" title="Keluar dari Akun">
+            Keluar
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       SEARCH & FILTER BAR (Tanggung Jawab: Anggota 2)
+       ======================================================================== -->
+  <section class="catalog-top-section">
+    <div class="container">
+      <div class="catalog-controls">
+        
+        <!-- Shopee Search Bar -->
+        <div class="shopee-search-bar">
+          <input
+            type="text"
+            id="searchInput"
+            class="shopee-search-input"
+            placeholder="Cari produk di ShopeeLite (nama barang, merk, atau kategori)..."
+            autocomplete="off"
+          />
+          <button type="button" class="shopee-search-btn" title="Cari Produk">
+            🔍
+          </button>
+        </div>
+
+        <!-- Baris Filter Kategori & Sorting (Functional Programming) -->
+        <div class="filter-sort-row">
+          <!-- Filter Kategori Dropdown -->
+          <div class="filter-group">
+            <span class="filter-label">Kategori:</span>
+            <select id="categoryFilter" class="shopee-select" aria-label="Filter Kategori">
+              <option value="all">Semua Kategori</option>
+            </select>
+          </div>
+
+          <!-- Sorting Dropdown -->
+          <div class="filter-group">
+            <span class="filter-label">Urutkan:</span>
+            <select id="sortFilter" class="shopee-select" aria-label="Urutan Produk">
+              <option value="default">Terkait / Rekomendasi</option>
+              <option value="price-asc">Harga: Termurah</option>
+              <option value="price-desc">Harga: Termahal</option>
+              <option value="rating-desc">Rating: Tertinggi</option>
+              <option value="rating-asc">Rating: Terendah</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       KONTEN KATALOG PRODUK (Tanggung Jawab: Anggota 2)
+       ======================================================================== -->
+  <main class="container" style="flex: 1;">
+
+    <!-- Indikator Loading State Visual -->
+    <div id="catalogLoading" class="catalog-status-box">
+      <div class="shopee-spinner"></div>
+      <p>Mengambil data produk dari ShopeeLite API...</p>
+    </div>
+
+    <!-- Global Visual Error Handling jika Fetch API Gagal -->
+    <div id="catalogError" class="catalog-error-box hidden">
+      <h3>⚠️ Gagal Terhubung ke API Produk</h3>
+      <p id="catalogErrorMessage">Terjadi kesalahan pada koneksi jaringan atau server.</p>
+      <button type="button" class="btn btn-shopee-orange" onclick="location.reload()">
+        Coba Muat Ulang
+      </button>
+    </div>
+
+    <!-- Empty State jika Produk Tidak Ditemukan -->
+    <div id="catalogEmpty" class="empty-results-box hidden">
+      <div class="empty-results-icon">🔎</div>
+      <h4>Tidak ada produk yang cocok</h4>
+      <p>Coba gunakan kata kunci pencarian lain atau pilih kategori yang berbeda.</p>
+    </div>
+
+    <!-- Grid Kartu Produk (Render Dinamis oleh catalog.js) -->
+    <div id="productGrid" class="product-grid">
+      <!-- Kartu-kartu produk dirender secara dinamis di sini -->
+    </div>
+
+    <!-- Tombol Load More / Pagination dengan Array Slicing -->
+    <div id="loadMoreSection" class="load-more-section hidden">
+      <div>
+        <button type="button" id="btnLoadMore" class="btn-load-more">
+          Muat Lebih Banyak
+        </button>
+        <p id="loadMoreInfo" class="load-more-info"></p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ========================================================================
+       MODAL DETAIL PRODUK (Tanggung Jawab: Anggota 3 - Event Delegation)
+       ======================================================================== -->
+  <div id="productDetailModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button type="button" class="modal-close-icon" id="modalCloseBtn" aria-label="Tutup">
+        &times;
+      </button>
+
+      <div class="modal-grid">
+        <div class="modal-img-area">
+          <img id="modalImg" class="modal-product-img" src="" alt="Detail Produk" />
+        </div>
+
+        <div class="modal-info-area">
+          <span id="modalCategory" class="modal-badge-cat">Kategori</span>
+          <h2 id="modalTitle" class="modal-name">Nama Produk</h2>
+          <span id="modalBrand" class="modal-brand-text">Brand</span>
+
+          <div class="modal-price-box">
+            <span class="currency-symbol">$</span>
+            <span id="modalPrice" class="modal-price-val">0.00</span>
+          </div>
+
+          <div id="modalStock" class="modal-stock-text">Stok tersedia: -</div>
+          <p id="modalDesc" class="modal-description">Deskripsi lengkap produk.</p>
+
+          <button type="button" id="modalAddToCartBtn" class="btn btn-shopee-orange" style="width: 100%; padding: 10px;">
+            🛒 Masukkan ke Keranjang
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer ShopeeLite -->
+  <footer class="shopee-footer">
+    <div class="container">
+      <p>&copy; 2026 ShopeeLite - Tugas Praktikum Pemrograman Web Modul 2 (Native Front-End)</p>
+    </div>
+  </footer>
+
+</body>
+</html>

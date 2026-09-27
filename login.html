@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopeeLite - Masuk Akun</title>
+
+  <!-- CSS Murni (Flat, Solid Color, No Gradient) -->
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/login.css" />
+
+  <!-- JavaScript Eksternal Wajib Memakai Atribut defer -->
+  <script src="js/auth.js" defer></script>
+</head>
+<body class="login-page">
+
+  <!-- Header Login ShopeeLite -->
+  <header class="login-top-bar">
+    <div class="container">
+      <a href="login.html" class="login-logo-link">
+        🛍️ Shopee<span class="shopee-logo-tag">Lite</span>
+      </a>
+      <span style="font-size: 0.82rem; color: var(--shopee-muted);">Butuh bantuan?</span>
+    </div>
+  </header>
+
+  <!-- Form Login Area -->
+  <main class="login-container-area">
+    <div class="login-box">
+      <h2>Log In</h2>
+      <p class="login-sub">Masuk menggunakan akun DummyJSON Anda</p>
+
+      <!-- Pesan Error Visual -->
+      <div id="loginErrorBox" class="login-error-alert hidden">
+        ⚠️ <span id="loginErrorMsg"></span>
+      </div>
+
+      <form id="loginForm" autocomplete="off">
+        <div class="form-item">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="input-field"
+            placeholder="Contoh: emilys"
+            required
+          />
+        </div>
+
+        <div class="form-item">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="input-field"
+            placeholder="Contoh: emilyspass"
+            required
+          />
+        </div>
+
+        <button type="submit" id="btnSubmit" class="btn btn-shopee-orange btn-full-login">
+          <span id="btnSpinner" class="shopee-spinner hidden" style="border-top-color: #ffffff; width: 16px; height: 16px;"></span>
+          <span id="btnText">Log In</span>
+        </button>
+      </form>
+
+      <!-- Kredensial Demo untuk Pengujian -->
+      <div class="demo-account-hint">
+        🔑 <strong>Akun Demo (DummyJSON):</strong><br />
+        Username: <code>emilys</code> | Password: <code>emilyspass</code><br />
+        Username: <code>michaelw</code> | Password: <code>michaelwpass</code>
+      </div>
+    </div>
+  </main>
+
+  <footer class="shopee-footer">
+    <div class="container">
+      <p>&copy; 2026 ShopeeLite - Tugas Praktikum Pemrograman Web Modul 2 (Native Front-End)</p>
+    </div>
+  </footer>
+
+</body>
+</html>

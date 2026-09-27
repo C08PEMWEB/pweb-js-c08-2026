@@ -1,0 +1,252 @@
+/* ==========================================================================
+   GLOBAL CSS - SHOPEE LITE THEME (FLAT & CLEAN, TANPA GRADIEN)
+   Warna Utama: Oranye Shopee (#ee4d2d)
+   ========================================================================== */
+
+:root {
+  /* Palet Warna ShopeeLite (Murni Flat Solid) */
+  --shopee-orange: #ee4d2d;
+  --shopee-orange-hover: #d73211;
+  --shopee-orange-light: #feeeea;
+  --shopee-bg: #f5f5f5;
+  --shopee-card: #ffffff;
+  --shopee-border: #e8e8e8;
+  --shopee-text: #222222;
+  --shopee-muted: #757575;
+  --shopee-price: #ee4d2d;
+  --shopee-rating: #ffb800;
+  --shopee-green: #26aa99;
+  --shopee-red: #ff424f;
+
+  /* Font & Radius */
+  --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--shopee-bg);
+  color: var(--shopee-text);
+  line-height: 1.4;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ==========================================================================
+   NAVBAR ALA SHOPEE LITE (Solid Oranye #ee4d2d, Tanpa Gradien)
+   ========================================================================== */
+.shopee-navbar {
+  background-color: var(--shopee-orange);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-top {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 0;
+  font-size: 0.8rem;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.navbar-top a,
+.navbar-top span {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.navbar-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 12px 0 14px 0;
+}
+
+.shopee-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+
+.shopee-logo-tag {
+  background-color: #ffffff;
+  color: var(--shopee-orange);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+}
+
+/* Navigasi Kanan (User & Cart) */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  white-space: nowrap;
+}
+
+.user-badge {
+  color: #ffffff;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.user-badge strong {
+  font-weight: 600;
+}
+
+.nav-cart-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.15s ease;
+}
+
+.nav-cart-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.cart-count {
+  background-color: #ffffff;
+  color: var(--shopee-orange);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.btn-logout {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 5px 12px;
+  font-size: 0.82rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn-logout:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ==========================================================================
+   TOMBOL & KOMPONEN GLOBAL
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-shopee-orange {
+  background-color: var(--shopee-orange);
+  color: #ffffff;
+  border-color: var(--shopee-orange);
+}
+
+.btn-shopee-orange:hover {
+  background-color: var(--shopee-orange-hover);
+  border-color: var(--shopee-orange-hover);
+}
+
+.btn-shopee-outline {
+  background-color: #ffffff;
+  color: var(--shopee-orange);
+  border-color: var(--shopee-orange);
+}
+
+.btn-shopee-outline:hover {
+  background-color: var(--shopee-orange-light);
+}
+
+.btn-white {
+  background-color: #ffffff;
+  color: var(--shopee-text);
+  border-color: var(--shopee-border);
+}
+
+.btn-white:hover {
+  background-color: #f8f8f8;
+}
+
+/* Spinner Indikator Loading */
+.shopee-spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--shopee-orange);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Footer Sederhana */
+.shopee-footer {
+  margin-top: auto;
+  background-color: #ffffff;
+  border-top: 1px solid var(--shopee-border);
+  padding: 24px 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--shopee-muted);
+}
