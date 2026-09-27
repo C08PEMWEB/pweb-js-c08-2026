@@ -7,6 +7,7 @@ node_modules/
 Modul-*
 modul-*
 /modul/
+modul/
 
 # OS & Editor Files
 .DS_Store
