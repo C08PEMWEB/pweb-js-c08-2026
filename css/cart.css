@@ -1,0 +1,232 @@
+/* ==========================================================================
+   CART CSS - SHOPEE LITE STYLE (Halaman Keranjang Belanja)
+   Tanggung Jawab: Anggota 3
+   ========================================================================== */
+
+.cart-page-main {
+  padding-top: 24px;
+  padding-bottom: 40px;
+  flex: 1;
+}
+
+.cart-page-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--shopee-text);
+  margin-bottom: 20px;
+}
+
+/* Empty state */
+.cart-empty-box {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: var(--shopee-card);
+  border: 1px solid var(--shopee-border);
+  border-radius: var(--radius-sm);
+  color: var(--shopee-muted);
+}
+
+.cart-empty-icon {
+  width: 64px;
+  height: 64px;
+  color: var(--shopee-border);
+  margin-bottom: 16px;
+}
+
+.cart-empty-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--shopee-text);
+  margin-bottom: 6px;
+}
+
+.cart-empty-text {
+  font-size: 0.88rem;
+  color: var(--shopee-muted);
+}
+
+/* Layout dua kolom: daftar item + ringkasan */
+.cart-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.cart-items-list {
+  flex: 2;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Satu baris item di keranjang */
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background-color: var(--shopee-card);
+  border: 1px solid var(--shopee-border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+}
+
+.cart-item-thumb {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  background-color: #fafafa;
+  border: 1px solid var(--shopee-border);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.cart-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-item-name {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--shopee-text);
+  margin-bottom: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cart-item-name:hover {
+  color: var(--shopee-orange);
+}
+
+.cart-item-price {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--shopee-price);
+}
+
+/* Kontrol jumlah barang */
+.cart-qty-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.cart-qty-btn {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--shopee-border);
+  background-color: #ffffff;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--shopee-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.cart-qty-btn:hover {
+  border-color: var(--shopee-orange);
+  color: var(--shopee-orange);
+}
+
+.cart-qty-value {
+  min-width: 20px;
+  text-align: center;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.cart-item-subtotal {
+  min-width: 110px;
+  text-align: right;
+  font-weight: 700;
+  color: var(--shopee-text);
+  flex-shrink: 0;
+}
+
+.cart-remove-btn {
+  background: none;
+  border: none;
+  color: var(--shopee-muted);
+  cursor: pointer;
+  font-size: 0.82rem;
+  text-decoration: underline;
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+}
+
+.cart-remove-btn:hover {
+  color: var(--shopee-red);
+}
+
+/* Ringkasan belanja */
+.cart-summary-box {
+  flex: 1;
+  min-width: 260px;
+  background-color: var(--shopee-card);
+  border: 1px solid var(--shopee-border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  position: sticky;
+  top: 90px;
+}
+
+.cart-summary-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--shopee-text);
+}
+
+.cart-summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  color: var(--shopee-muted);
+  margin-bottom: 10px;
+}
+
+.cart-summary-divider {
+  height: 1px;
+  background-color: var(--shopee-border);
+  margin: 12px 0;
+}
+
+.cart-summary-total {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--shopee-text);
+}
+
+.cart-summary-total span:last-child {
+  color: var(--shopee-price);
+}
+
+.cart-checkout-btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 12px;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 700px) {
+  .cart-summary-box {
+    position: static;
+  }
+
+  .cart-item-row {
+    flex-wrap: wrap;
+  }
+
+  .cart-item-subtotal {
+    text-align: left;
+  }
+}

@@ -1,0 +1,144 @@
+/* ==========================================================================
+   MODAL CSS - DETAIL PRODUK (Tanggung Jawab: Anggota 3)
+   ========================================================================== */
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-card {
+  background-color: var(--shopee-card);
+  border-radius: var(--radius-sm);
+  max-width: 640px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 24px;
+}
+
+.modal-close-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: #f5f5f5;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--shopee-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.modal-close-icon:hover {
+  background-color: var(--shopee-orange-light);
+  color: var(--shopee-orange);
+}
+
+.modal-grid {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.modal-img-area {
+  flex: 1;
+  min-width: 220px;
+}
+
+.modal-product-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background-color: #fafafa;
+  border: 1px solid var(--shopee-border);
+  border-radius: var(--radius-sm);
+}
+
+.modal-info-area {
+  flex: 1.2;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-badge-cat {
+  display: inline-block;
+  background-color: var(--shopee-orange-light);
+  color: var(--shopee-orange);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  text-transform: capitalize;
+  margin-bottom: 8px;
+  width: fit-content;
+}
+
+.modal-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--shopee-text);
+  margin-bottom: 4px;
+  line-height: 1.35;
+}
+
+.modal-brand-text {
+  font-size: 0.85rem;
+  color: var(--shopee-muted);
+  margin-bottom: 14px;
+}
+
+.modal-price-box {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.modal-price-box .currency-symbol {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--shopee-price);
+}
+
+.modal-price-val {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--shopee-price);
+}
+
+.modal-stock-text {
+  font-size: 0.85rem;
+  color: var(--shopee-green);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.modal-description {
+  font-size: 0.88rem;
+  color: var(--shopee-text);
+  line-height: 1.5;
+  margin-bottom: 20px;
+  flex: 1;
+}
