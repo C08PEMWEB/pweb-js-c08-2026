@@ -103,6 +103,21 @@
   color: var(--shopee-orange);
 }
 
+.cart-item-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: var(--shopee-rating);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.cart-item-rating .icon-star-svg {
+  width: 13px;
+  height: 13px;
+}
+
 .cart-item-price {
   font-size: 0.95rem;
   font-weight: 700;

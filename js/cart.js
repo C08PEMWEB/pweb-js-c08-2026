@@ -1,23 +1,5 @@
-/**
- * ==========================================================================
- * KERANJANG BELANJA & CRUD LOCALSTORAGE (cart.js)
- * TANGGUNG JAWAB: ANGGOTA 3
- * ==========================================================================
- * Skema data localStorage, key "cart":
- * [
- *   { id: 1, title: "Nama Produk", thumbnail: "url", price: 12.5, qty: 2 }
- * ]
- * Catatan: price disimpan dalam USD (asli dari API), BUKAN hasil konversi
- * Rupiah — supaya konsisten dengan sumber data dan gampang direformat ulang
- * kalau kurs berubah.
- * ==========================================================================
- */
 
 const CART_STORAGE_KEY = 'cart';
-
-// Fallback kurs — dipakai HANYA kalau formatRupiah dari catalog.js tidak ada
-// (misal saat halaman ini dibuka sendiri tanpa index.html). Kalau kurs di
-// catalog.js berubah, nilai ini juga harus disesuaikan manual.
 const FALLBACK_KURS_USD_KE_IDR = 16000;
 
 function formatHargaRupiah(priceInUSD) {
@@ -72,6 +54,7 @@ function addToCart(productId) {
       brand: product.brand,
       stock: product.stock,
       description: product.description,
+      rating: product.rating,
       qty: 1,
     });
   }
@@ -119,6 +102,9 @@ function updateCartBadge() {
   badge.textContent = totalQty;
 }
 
+/* ==========================================================================
+   RENDER HALAMAN CART.HTML (hanya jalan kalau elemen cart ada di DOM)
+   ========================================================================== */
 function renderCartPage() {
   const listContainer = document.getElementById('cartItemsList');
   if (!listContainer) return; // bukan halaman cart.html, skip
@@ -160,6 +146,12 @@ function renderCartPage() {
         <div class="cart-item-name" data-action="open-detail" data-id="${item.id}" title="${escapeHtmlCart(item.title)}">
           ${escapeHtmlCart(item.title)}
         </div>
+        <div class="cart-item-rating">
+          <svg class="icon-star-svg" viewBox="0 0 24 24" fill="#ffb800">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          <span>${item.rating ? item.rating.toFixed(1) : '-'}</span>
+        </div>
         <div class="cart-item-price">Rp ${formatHargaRupiah(item.price)}</div>
       </div>
       <div class="cart-qty-control">
@@ -192,7 +184,9 @@ function escapeHtmlCart(text) {
     .replace(/'/g, '&#039;');
 }
 
-
+/* ==========================================================================
+   TOAST NOTIFIKASI SEDERHANA
+   ========================================================================== */
 function showToast(message) {
   const existing = document.getElementById('cartToast');
   if (existing) existing.remove();
@@ -224,12 +218,13 @@ function showToast(message) {
     toast.style.opacity = '1';
   }, 10);
 
-  // Fade-out lalu hapus dari DOM
+  // Fade-out
   setTimeout(() => {
     toast.style.opacity = '0';
     setTimeout(() => toast.remove(), 200);
   }, 2000);
 }
+
 
 function handleCartAreaClick(event) {
   const target = event.target.closest('[data-action]');
@@ -280,6 +275,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCartPage();
 });
 
-
+// Ekspor untuk dipakai modal.js
 window.addToCart = addToCart;
 window.getCart = getCart;
