@@ -3,27 +3,20 @@
  * KATALOG PRODUK & MANIPULASI DATA (catalog.js)
  * TANGGUNG JAWAB: ANGGOTA 2
  * ==========================================================================
- * Konsep & Fitur Wajib yang Diimplementasikan:
- * 1. Pengambilan data dari Products API (https://dummyjson.com/products) via fetch().
+ * Fitur:
+ * 1. Fetch data dari Products API (https://dummyjson.com/products).
  * 2. Visual Global Error Handling jika fetch produk gagal.
- * 3. Render dinamis kartu produk ke DOM.
- * 4. Pencarian Real-Time dengan teknik Debounce (Closure).
- * 5. Filter & Sorting menggunakan Functional Programming (pure array methods).
- * 6. Tombol Load More / Pagination menggunakan teknik Array Slicing.
+ * 3. Render dinamis kartu produk dengan format Rupiah & Vector SVG Star.
+ * 4. Pencarian Real-Time dengan Debounce (Closure).
+ * 5. Filter & Sorting (Functional Programming).
+ * 6. Tombol Load More dengan Array Slicing.
+ * 7. Interaksi Header Shopee: Search button, Keyword tags, & Avatar Dropdown.
  * ==========================================================================
  */
 
-// 1. URL API & Variabel State Sederhana
+// 1. URL API, Kurs Rupiah & Variabel State Sederhana
 const PRODUCTS_API_URL = 'https://dummyjson.com/products?limit=100';
-const KURS_USD_KE_IDR = 16000; // Kurs konversi USD ke Rupiah (Rp 16.000 / USD)
-
-/**
- * Format harga dari USD ke format Rupiah Indonesia (contoh: 160.000)
- */
-function formatRupiah(priceInUSD) {
-  const rupiah = Math.round(priceInUSD * KURS_USD_KE_IDR);
-  return rupiah.toLocaleString('id-ID');
-}
+const KURS_USD_KE_IDR = 16000; // Kurs konversi: Rp 16.000 / USD
 
 let allProducts = [];        // Data asli seluruh produk dari API
 let filteredProducts = [];   // Data produk setelah disaring (search/filter/sort)
@@ -37,20 +30,27 @@ const catalogError = document.getElementById('catalogError');
 const catalogErrorMsg = document.getElementById('catalogErrorMessage');
 const catalogEmpty = document.getElementById('catalogEmpty');
 const searchInput = document.getElementById('searchInput');
+const btnSearch = document.getElementById('btnSearch');
 const categoryFilter = document.getElementById('categoryFilter');
 const sortFilter = document.getElementById('sortFilter');
 const btnLoadMore = document.getElementById('btnLoadMore');
 const loadMoreSection = document.getElementById('loadMoreSection');
 const loadMoreInfo = document.getElementById('loadMoreInfo');
+const userAvatarBtn = document.getElementById('userAvatarBtn');
+const userMenuWrapper = document.getElementById('userMenuWrapper');
+
+/**
+ * Format harga dari USD ke format Rupiah Indonesia (contoh: 160.000)
+ */
+function formatRupiah(priceInUSD) {
+  const rupiah = Math.round(priceInUSD * KURS_USD_KE_IDR);
+  return rupiah.toLocaleString('id-ID');
+}
 
 /**
  * ==========================================================================
  * 3. TEKNIK DEBOUNCE (Memanfaatkan Konsep CLOSURE)
  * ==========================================================================
- * Penjelasan untuk Demo:
- * Fungsi di dalam mengingat variabel 'timer' dari lingkup luarnya (Closure).
- * Setiap ada ketikan baru sebelum jeda selesai, timer lama dibatalkan dan
- * direset kembali, sehingga browser tidak melakukan re-render berlebihan.
  */
 function debounce(callback, delay = 300) {
   let timer; // Variabel privat yang disimpan oleh closure
@@ -58,7 +58,7 @@ function debounce(callback, delay = 300) {
   return function (...args) {
     clearTimeout(timer); // Batalkan timer sebelumnya
     timer = setTimeout(() => {
-      callback.apply(this, args); // Jalankan fungsi setelah user berhenti mengetik
+      callback.apply(this, args); // Jalankan fungsi setelah jeda ketikan
     }, delay);
   };
 }
@@ -69,14 +69,12 @@ function debounce(callback, delay = 300) {
  * ==========================================================================
  */
 async function fetchProducts() {
-  // Tampilkan loading spinner & sembunyikan pesan error
   showLoading(true);
   hideError();
 
   try {
     const response = await fetch(PRODUCTS_API_URL);
 
-    // Cek status HTTP respon
     if (!response.ok) {
       throw new Error(`Gagal memuat produk dari server (Status: ${response.status})`);
     }
@@ -92,10 +90,8 @@ async function fetchProducts() {
 
   } catch (error) {
     console.error('Terjadi kesalahan saat fetch produk:', error);
-    // Tampilkan pesan error visual kepada pengguna
     showError(error.message || 'Koneksi ke server bermasalah.');
   } finally {
-    // Sembunyikan loading spinner setelah selesai
     showLoading(false);
   }
 }
@@ -106,16 +102,13 @@ async function fetchProducts() {
 function setupCategoryOptions(products) {
   if (!categoryFilter) return;
 
-  // Ambil daftar kategori unik menggunakan Set
   const categories = [...new Set(products.map((p) => p.category))].sort();
 
-  // Reset opsi kategori dengan opsi awal
   categoryFilter.innerHTML = '<option value="all">Semua Kategori</option>';
 
   categories.forEach((cat) => {
     const option = document.createElement('option');
     option.value = cat;
-    // Format huruf awal kapital (misal: "beauty" -> "Beauty")
     option.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
     categoryFilter.appendChild(option);
   });
@@ -125,37 +118,32 @@ function setupCategoryOptions(products) {
  * ==========================================================================
  * 5. FILTER & SORTING (FUNCTIONAL PROGRAMMING)
  * ==========================================================================
- * Penjelasan untuk Demo:
- * Menggunakan metode array murni (.filter() dan .sort()) tanpa memodifikasi
- * array asli 'allProducts'. Menghasilkan array baru yang bersih.
  */
 function applyFilterAndSort() {
   const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
   const selectedCategory = categoryFilter ? categoryFilter.value : 'all';
   const selectedSort = sortFilter ? sortFilter.value : 'default';
 
-  // 1. FILTER: Pencarian teks & Kategori
+  // 1. FILTER: Pencarian teks & Kategori (Pure Function)
   let result = allProducts.filter((product) => {
-    // Cocokkan judul, kategori, atau brand dengan kata kunci pencarian
     const matchesQuery =
       product.title.toLowerCase().includes(query) ||
       product.category.toLowerCase().includes(query) ||
       (product.brand && product.brand.toLowerCase().includes(query));
 
-    // Cocokkan kategori dropdown
     const matchesCategory =
       selectedCategory === 'all' || product.category === selectedCategory;
 
     return matchesQuery && matchesCategory;
   });
 
-  // 2. SORTING: Pengurutan harga atau rating
+  // 2. SORTING: Pengurutan harga atau rating (Pure Function)
   result = [...result].sort((a, b) => {
     if (selectedSort === 'price-asc') return a.price - b.price;       // Termurah
     if (selectedSort === 'price-desc') return b.price - a.price;      // Termahal
     if (selectedSort === 'rating-desc') return b.rating - a.rating;   // Rating tertinggi
     if (selectedSort === 'rating-asc') return a.rating - b.rating;    // Rating terendah
-    return a.id - b.id; // Urutan rekomendasi / default ID
+    return a.id - b.id; // Urutan default (ID)
   });
 
   filteredProducts = result;
@@ -165,19 +153,14 @@ function applyFilterAndSort() {
 
 /**
  * ==========================================================================
- * 6. RENDER KARTU PRODUK KE DOM DENGAN TEKNIK ARRAY SLICING (Load More)
+ * 6. RENDER KARTU PRODUK KE DOM DENGAN ARRAY SLICING
  * ==========================================================================
- * Penjelasan untuk Demo:
- * Menggunakan .slice(0, currentLimit) untuk mengambil porsi data yang ingin
- * ditampilkan ke layar, sehingga performa halaman tetap ringan dan cepat.
  */
 function renderProducts() {
   if (!productGrid) return;
 
-  // Bersihkan kartu sebelumnya
   productGrid.innerHTML = '';
 
-  // Jika tidak ada produk yang cocok
   if (filteredProducts.length === 0) {
     if (catalogEmpty) catalogEmpty.classList.remove('hidden');
     if (loadMoreSection) loadMoreSection.classList.add('hidden');
@@ -189,13 +172,12 @@ function renderProducts() {
   // Potong data sesuai limit pagination saat ini (Array Slicing)
   const itemsToShow = filteredProducts.slice(0, currentLimit);
 
-  // Buat HTML kartu produk ala ShopeeLite
   itemsToShow.forEach((product) => {
     const card = document.createElement('div');
     card.className = 'product-card';
     card.dataset.id = product.id; // Digunakan oleh Event Delegation Anggota 3
 
-    // Badge diskon Shopee (jika ada diskon)
+    // Badge diskon Shopee
     const discountBadge = product.discountPercentage
       ? `<span class="shopee-discount-tag">-${Math.round(product.discountPercentage)}%</span>`
       : '';
@@ -215,7 +197,12 @@ function renderProducts() {
           <span class="price-number">${formatRupiah(product.price)}</span>
         </div>
         <div class="card-meta">
-          <span class="card-rating">⭐ ${product.rating.toFixed(1)}</span>
+          <span class="card-rating">
+            <svg class="icon-star-svg" viewBox="0 0 24 24" fill="#ffb800">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            <span>${product.rating.toFixed(1)}</span>
+          </span>
           <span class="card-brand">${escapeHtml(product.brand || 'Original')}</span>
         </div>
         <div class="card-footer">
@@ -229,7 +216,6 @@ function renderProducts() {
     productGrid.appendChild(card);
   });
 
-  // Atur tampilan tombol "Load More"
   updateLoadMoreState();
 }
 
@@ -239,7 +225,7 @@ function renderProducts() {
  * ==========================================================================
  */
 function handleLoadMore() {
-  currentLimit += ITEMS_PER_PAGE; // Tambah batas slice
+  currentLimit += ITEMS_PER_PAGE;
   renderProducts();
 }
 
@@ -253,7 +239,6 @@ function updateLoadMoreState() {
     loadMoreInfo.textContent = `Menampilkan ${showing} dari ${total} produk`;
   }
 
-  // Sembunyikan tombol jika seluruh produk sudah ditampilkan
   if (currentLimit >= total) {
     btnLoadMore.classList.add('hidden');
   } else {
@@ -287,7 +272,6 @@ function hideError() {
   }
 }
 
-// Mencegah XSS sederhana pada data dari API
 function escapeHtml(text) {
   if (!text) return '';
   return String(text)
@@ -300,11 +284,10 @@ function escapeHtml(text) {
 
 /**
  * ==========================================================================
- * 9. EVENT LISTENERS
+ * 9. INISIALISASI EVENT LISTENERS
  * ==========================================================================
  */
 document.addEventListener('DOMContentLoaded', () => {
-  // Hanya jalankan jika berada di halaman yang memiliki productGrid
   if (!document.getElementById('productGrid')) return;
 
   // 1. Pencarian Real-Time menggunakan DEBOUNCE (Closure)
@@ -316,29 +299,62 @@ document.addEventListener('DOMContentLoaded', () => {
     searchInput.addEventListener('input', onSearchDebounced);
   }
 
-  // 2. Dropdown Filter Kategori
+  // 2. Tombol Search di Header
+  if (btnSearch) {
+    btnSearch.addEventListener('click', () => {
+      applyFilterAndSort();
+    });
+  }
+
+  // 3. Kata Kunci Populer di Bawah Search Bar (Interactive Tags)
+  const keywordTags = document.querySelectorAll('.keyword-tag');
+  keywordTags.forEach((tag) => {
+    tag.addEventListener('click', () => {
+      const keyword = tag.dataset.keyword || tag.textContent.trim();
+      if (searchInput) {
+        searchInput.value = keyword;
+      }
+      applyFilterAndSort();
+    });
+  });
+
+  // 4. Dropdown Menu Avatar Pengguna (Toggle on Click & Outside Click)
+  if (userAvatarBtn && userMenuWrapper) {
+    userAvatarBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      userMenuWrapper.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!userMenuWrapper.contains(e.target)) {
+        userMenuWrapper.classList.remove('active');
+      }
+    });
+  }
+
+  // 5. Dropdown Filter Kategori
   if (categoryFilter) {
     categoryFilter.addEventListener('change', () => {
       applyFilterAndSort();
     });
   }
 
-  // 3. Dropdown Sorting Produk
+  // 6. Dropdown Sorting Produk
   if (sortFilter) {
     sortFilter.addEventListener('change', () => {
       applyFilterAndSort();
     });
   }
 
-  // 4. Tombol Load More
+  // 7. Tombol Load More
   if (btnLoadMore) {
     btnLoadMore.addEventListener('click', handleLoadMore);
   }
 
-  // Panggil fetch awal data produk
+  // Fetch data awal produk
   fetchProducts();
 });
 
-// Menyediakan akses produk dan fungsi format Rupiah untuk modul lain (Anggota 3)
+// Ekspor utilitas untuk modul lain (Anggota 3)
 window.getAllProducts = () => allProducts;
 window.formatRupiah = formatRupiah;
