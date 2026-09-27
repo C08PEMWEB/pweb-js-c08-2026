@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - ecommerce</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+<br>
+
+  <main class="login-card">
+    <h1>Mau Nama Apa?</h1>
+    <p class="subtitle">nanti warna aku sesuaiin</p>
+ 
+    <form id="form-login">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="contoh: emilys" required>
+        
+      <br>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="contoh: emilyspass" required>
+ 
+      <br>
+
+      <button type="submit" id="btn-login">
+        <span id="btn-text">Masuk</span>
+        <span id="loading" class="hidden">Memproses...</span>
+      </button>
+ 
+      <p id="error-message" class="error hidden"></p>
+    </form>
+  </main>
+ 
+  <script src="login.js" defer></script>
+</body>
+</html>
