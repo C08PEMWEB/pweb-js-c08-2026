@@ -450,3 +450,71 @@ body {
   font-size: 0.8rem;
   color: var(--shopee-muted);
 }
+
+
+@media (max-width: 768px) {
+  .navbar-main {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 10px 0;
+  }
+
+  .shopee-logo-text {
+    font-size: 1.25rem;
+  }
+
+  .shopee-bag-svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .shopee-logo-tag {
+    font-size: 0.62rem;
+  }
+
+
+  .header-search-wrapper {
+    order: 3;
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+
+  .search-keywords-row {
+    display: none; 
+  }
+
+  .nav-right-actions {
+    gap: 12px;
+  }
+
+  .icon-svg-cart {
+    width: 22px;
+    height: 22px;
+  }
+
+  .user-avatar-circle {
+    width: 32px;
+    height: 32px;
+  }
+
+  .icon-svg-avatar {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shopee-logo-text {
+    font-size: 1.05rem;
+  }
+
+
+  .shopee-search-input {
+    font-size: 0.85rem;
+    padding: 7px 10px;
+  }
+
+  .user-dropdown-card {
+    width: 190px;
+  }
+}
