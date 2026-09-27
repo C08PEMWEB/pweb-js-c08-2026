@@ -47,19 +47,8 @@ body {
   padding: 0 16px;
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
-
 /* ==========================================================================
-   NAVBAR UTAMA ALA SHOPEE (Solid Oranye #ee4d2d, Search di Dalam Header)
+   NAVBAR ALA SHOPEE LITE (Solid Oranye #ee4d2d, Tanpa Gradien)
    ========================================================================== */
 .shopee-navbar {
   background-color: var(--shopee-orange);
@@ -73,15 +62,17 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   padding: 6px 0;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: #ffffff;
-  opacity: 0.9;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.navbar-top a,
 .navbar-top span {
   color: #ffffff;
+  text-decoration: none;
 }
 
 .navbar-main {
@@ -89,285 +80,94 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 10px 0 14px 0;
+  padding: 12px 0 14px 0;
 }
 
-/* 1. Logo Shopee (Vector SVG Bag + Text) */
 .shopee-logo {
   display: flex;
   align-items: center;
   gap: 8px;
   color: #ffffff;
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: -0.5px;
   white-space: nowrap;
-}
-
-.shopee-bag-svg {
-  width: 38px;
-  height: 38px;
-  flex-shrink: 0;
-}
-
-.shopee-logo-text {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #ffffff;
 }
 
 .shopee-logo-tag {
   background-color: #ffffff;
   color: var(--shopee-orange);
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 700;
   padding: 2px 6px;
   border-radius: var(--radius-sm);
   text-transform: uppercase;
-  margin-left: 2px;
 }
 
-/* 2. Header Search Wrapper di dalam Navbar */
-.header-search-wrapper {
-  flex: 1;
-  max-width: 680px;
+/* Navigasi Kanan (User & Cart) */
+.nav-actions {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  white-space: nowrap;
+}
+
+.user-badge {
+  color: #ffffff;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
   gap: 6px;
 }
 
-.shopee-search-bar {
-  display: flex;
-  width: 100%;
-  background-color: #ffffff;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  padding: 3px;
+.user-badge strong {
+  font-weight: 600;
 }
 
-.shopee-search-input {
-  flex: 1;
-  border: none;
-  padding: 8px 14px;
-  font-size: 0.92rem;
-  font-family: inherit;
-  outline: none;
-  color: var(--shopee-text);
-  background-color: #ffffff;
-}
-
-.shopee-search-input::placeholder {
-  color: #999999;
-  font-size: 0.88rem;
-}
-
-.shopee-search-btn {
-  background-color: var(--shopee-orange);
-  color: #ffffff;
-  border: none;
-  width: 56px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.15s ease;
-}
-
-.shopee-search-btn:hover {
-  background-color: var(--shopee-orange-hover);
-}
-
-.icon-svg-search {
-  width: 18px;
-  height: 18px;
-}
-
-/* Tag Kata Kunci Populer di Bawah Search Bar */
-.search-keywords-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  overflow-x: auto;
-  white-space: nowrap;
-  scrollbar-width: none;
-}
-
-.search-keywords-row::-webkit-scrollbar {
-  display: none;
-}
-
-.keyword-tag {
-  color: #ffffff;
-  font-size: 0.75rem;
-  cursor: pointer;
-  opacity: 0.9;
-  transition: opacity 0.15s ease;
-  text-transform: capitalize;
-}
-
-.keyword-tag:hover {
-  opacity: 1;
-  text-decoration: underline;
-}
-
-/* 3. Aksi Kanan: Cart Icon & User Avatar Lingkaran */
-.nav-right-actions {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-/* Icon Keranjang Belanja */
-.nav-cart-icon-btn {
+.nav-cart-btn {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 6px;
   color: #ffffff;
   text-decoration: none;
-  padding: 6px;
-  border-radius: 50%;
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.15s ease;
 }
 
-.nav-cart-icon-btn:hover {
-  transform: scale(1.06);
-  background-color: rgba(255, 255, 255, 0.12);
+.nav-cart-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-.icon-svg-cart {
-  width: 26px;
-  height: 26px;
-}
-
-.cart-count-badge {
-  position: absolute;
-  top: -4px;
-  right: -8px;
+.cart-count {
   background-color: #ffffff;
   color: var(--shopee-orange);
-  font-size: 0.72rem;
-  font-weight: 800;
+  font-size: 0.75rem;
+  font-weight: 700;
   padding: 1px 6px;
   border-radius: 10px;
   min-width: 18px;
   text-align: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* User Avatar Bulat di Kanan Sendiri */
-.user-profile-menu {
-  position: relative;
-}
-
-.user-avatar-circle {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background-color: #ffffff;
-  color: var(--shopee-orange);
-  border: 2px solid rgba(255, 255, 255, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.user-avatar-circle:hover {
-  transform: scale(1.05);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.icon-svg-avatar {
-  width: 22px;
-  height: 22px;
-}
-
-/* Dropdown Menu Pengguna */
-.user-dropdown-card {
-  position: absolute;
-  top: calc(100% + 10px);
-  right: 0;
-  width: 220px;
-  background-color: #ffffff;
-  border: 1px solid var(--shopee-border);
+.btn-logout {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 5px 12px;
+  font-size: 0.82rem;
   border-radius: var(--radius-sm);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  padding: 8px 0;
-  display: none;
-  z-index: 200;
-}
-
-/* Muncul saat hover menu atau class active */
-.user-profile-menu:hover .user-dropdown-card,
-.user-profile-menu.active .user-dropdown-card {
-  display: block;
-}
-
-.user-dropdown-header {
-  padding: 10px 16px 8px 16px;
-  display: flex;
-  flex-direction: column;
-}
-
-.dropdown-greeting-label {
-  font-size: 0.75rem;
-  color: var(--shopee-muted);
-}
-
-.dropdown-username {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--shopee-orange);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.user-dropdown-divider {
-  height: 1px;
-  background-color: var(--shopee-border);
-  margin: 6px 0;
-}
-
-.dropdown-item-link,
-.dropdown-item-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  padding: 10px 16px;
-  font-size: 0.88rem;
-  color: var(--shopee-text);
-  text-decoration: none;
-  background: transparent;
-  border: none;
   cursor: pointer;
-  font-family: inherit;
-  text-align: left;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition: background-color 0.15s ease;
 }
 
-.dropdown-item-link:hover,
-.dropdown-item-btn:hover {
-  background-color: #fafafa;
-  color: var(--shopee-orange);
-}
-
-.icon-dropdown {
-  width: 18px;
-  height: 18px;
-  color: var(--shopee-muted);
-  flex-shrink: 0;
-}
-
-.dropdown-item-link:hover .icon-dropdown,
-.dropdown-item-btn:hover .icon-dropdown {
-  color: var(--shopee-orange);
+.btn-logout:hover {
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 /* ==========================================================================
@@ -421,8 +221,8 @@ body {
 
 /* Spinner Indikator Loading */
 .shopee-spinner {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   border: 3px solid rgba(0, 0, 0, 0.1);
   border-top-color: var(--shopee-orange);
   border-radius: 50%;

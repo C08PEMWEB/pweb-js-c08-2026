@@ -1,0 +1,16 @@
+# Dependencies & Environment
+node_modules/
+.env
+
+# Modul & Course Materials (Jangan di-push ke repository)
+*.zip
+Modul-*
+modul-*
+/modul/
+
+# OS & Editor Files
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/

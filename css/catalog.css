@@ -1,37 +1,87 @@
 /* ==========================================================================
    CATALOG CSS - SHOPEE LITE STYLE (Halaman Katalog & Produk)
    Tanggung Jawab: Anggota 2
-   Karakteristik: Flat design, Solid Orange (#ee4d2d), Tanpa Gradien, Tanpa Emote
+   Karakteristik: Flat design, Solid Orange (#ee4d2d), Tanpa Gradien, Tidak Slop
    ========================================================================== */
 
 /* ==========================================================================
-   1. FILTER & SORTING BAR (DI BAWAH HEADER SHOPEE)
+   1. FILTER & SEARCH CONTROL BAR (ALA SHOPEE LITE)
    ========================================================================== */
-.catalog-filter-bar {
+.catalog-top-section {
   background-color: #ffffff;
   border-bottom: 1px solid var(--shopee-border);
-  padding: 12px 0;
-  margin-bottom: 24px;
+  padding: 16px 0;
+  margin-bottom: 20px;
 }
 
-.filter-bar-content {
+.catalog-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Shopee Search Box */
+.shopee-search-bar {
+  display: flex;
+  width: 100%;
+  background-color: #ffffff;
+  border: 2px solid var(--shopee-orange);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.shopee-search-input {
+  flex: 1;
+  border: none;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  color: var(--shopee-text);
+  background-color: #ffffff;
+}
+
+.shopee-search-input::placeholder {
+  color: #999999;
+  font-size: 0.88rem;
+}
+
+.shopee-search-btn {
+  background-color: var(--shopee-orange);
+  color: #ffffff;
+  border: none;
+  padding: 0 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.shopee-search-btn:hover {
+  background-color: var(--shopee-orange-hover);
+}
+
+/* Filter Kategori & Sorting Row */
+.filter-sort-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
+  padding-top: 4px;
 }
 
-.filter-left,
-.filter-right {
+.filter-group {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--shopee-muted);
 }
 
-.filter-title {
-  font-size: 0.88rem;
-  font-weight: 600;
+.filter-label {
+  font-weight: 500;
   color: var(--shopee-text);
 }
 
@@ -39,7 +89,7 @@
   background-color: #ffffff;
   border: 1px solid var(--shopee-border);
   border-radius: var(--radius-sm);
-  padding: 8px 14px;
+  padding: 7px 12px;
   font-size: 0.88rem;
   color: var(--shopee-text);
   font-family: inherit;
@@ -53,7 +103,7 @@
 }
 
 /* ==========================================================================
-   2. VISUAL FEEDBACK: LOADING & ERROR STATE (VECTOR ICONS)
+   2. VISUAL FEEDBACK: LOADING & ERROR STATE
    ========================================================================== */
 .catalog-status-box {
   text-align: center;
@@ -72,8 +122,8 @@
 
 .catalog-error-box {
   background-color: #ffffff;
-  border: 1px solid var(--shopee-red);
-  border-left: 4px solid var(--shopee-red);
+  border: 1px solid #ff424f;
+  border-left: 4px solid #ff424f;
   padding: 24px;
   border-radius: var(--radius-sm);
   text-align: center;
@@ -81,13 +131,9 @@
 }
 
 .catalog-error-box h3 {
-  color: var(--shopee-red);
+  color: #ff424f;
   font-size: 1.1rem;
   margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
 }
 
 .catalog-error-box p {
@@ -105,16 +151,9 @@
   margin-bottom: 24px;
 }
 
-.empty-results-icon-wrap {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 14px;
-}
-
-.icon-empty-svg {
-  width: 48px;
-  height: 48px;
-  color: var(--shopee-muted);
+.empty-results-icon {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
 }
 
 .empty-results-box h4 {
@@ -238,7 +277,7 @@
   color: var(--shopee-price);
 }
 
-/* Rating & Brand (Vector Star SVG) */
+/* Rating & Brand */
 .card-meta {
   display: flex;
   align-items: center;
@@ -253,13 +292,7 @@
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 3px;
-}
-
-.icon-star-svg {
-  width: 13px;
-  height: 13px;
-  flex-shrink: 0;
+  gap: 2px;
 }
 
 .card-brand {
@@ -279,15 +312,6 @@
   padding: 6px 10px;
   font-size: 0.82rem;
   font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.btn-add-cart svg {
-  width: 14px;
-  height: 14px;
 }
 
 /* ==========================================================================
@@ -317,6 +341,7 @@
   color: #ffffff;
 }
 
+/* Info jumlah item yang tampil */
 .load-more-info {
   text-align: center;
   font-size: 0.82rem;
