@@ -69,8 +69,8 @@ function debounce(callback, delay = 300) {
  * ==========================================================================
  */
 async function fetchProducts() {
-  showLoading(true);
-  hideError();
+  showCatalogLoading(true);
+  hideCatalogError();
 
   try {
     const response = await fetch(PRODUCTS_API_URL);
@@ -90,9 +90,9 @@ async function fetchProducts() {
 
   } catch (error) {
     console.error('Terjadi kesalahan saat fetch produk:', error);
-    showError(error.message || 'Koneksi ke server bermasalah.');
+    showCatalogError(error.message || 'Koneksi ke server bermasalah.');
   } finally {
-    showLoading(false);
+    showCatalogLoading(false);
   }
 }
 
@@ -252,21 +252,21 @@ function updateLoadMoreState() {
  * 8. FUNGSI PEMBANTU (HELPERS)
  * ==========================================================================
  */
-function showLoading(isLoading) {
+function showCatalogLoading(isLoading) {
   if (catalogLoading) {
     if (isLoading) catalogLoading.classList.remove('hidden');
     else catalogLoading.classList.add('hidden');
   }
 }
 
-function showError(message) {
+function showCatalogError(message) {
   if (catalogError && catalogErrorMsg) {
     catalogErrorMsg.textContent = message;
     catalogError.classList.remove('hidden');
   }
 }
 
-function hideError() {
+function hideCatalogError() {
   if (catalogError) {
     catalogError.classList.add('hidden');
   }
